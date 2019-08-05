@@ -70,7 +70,7 @@ function get_game_data() {
   $.ajax({
     async: false,
     type: 'GET',
-    url: 'api/game',
+    url: '/api/game',
     dataType: 'json',
     success: function (data) {
 
@@ -132,8 +132,6 @@ function check_answer(idOfClickedButton) {
 
     sendOK(uzvarasId, 'Y');
     myFunction();
-    points+=1;
-    console.log(points)
 
   }
   else {;
@@ -176,3 +174,79 @@ function sendOK(uzvarasId, result) {
     }
   });
 };
+
+function countdown(){
+  document.getElementById("header").style.display = "none";
+  document.getElementById("start").style.display = "flex";
+
+    var start = 3,
+        display = document.querySelector('#time');
+    startTimer(start, display);
+};
+
+function startTimer(duration, display) {
+
+  var timer = duration, seconds;
+  var myInterval = setInterval(function () {
+      seconds = parseInt(timer % 60, 10);
+
+      seconds = seconds < 10 ? seconds : seconds;
+
+      display.textContent = seconds;
+
+      if (--timer < 0) {
+          timer = duration;
+          get_game_data();
+          gameTimer();
+          document.getElementById("start").style.display = "none";
+          clearInterval(myInterval);
+          
+      }
+  }, 1000);
+}
+
+function time_check_answer(idOfClickedButton) {
+
+  var pointss = document.getElementsByClassName("point_count"),
+    point = 0;
+  
+
+  if (idOfClickedButton == uzvarasId) {
+    points += 10;
+    get_game_data();
+  }
+  else {
+    get_game_data();
+  }
+  pointss.innerHTML = "POINTS: " + points;
+}
+var mypoints;
+function pointCounter(){
+  console.log(points);
+}
+
+function startGameTimer(duration, display) {
+  var timer1 = duration, minutes, seconds;
+  setInterval(function () {
+      minutes = parseInt(timer1 / 60, 10);
+      seconds = parseInt(timer1 % 60, 10);
+
+      minutes = minutes < 10 ? "0" + minutes : minutes;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = minutes + ":" + seconds;
+
+      if (--timer1 < 0) {
+          timer1 = duration;
+        
+      }
+  }, 1000);
+}
+
+function gameTimer(){
+  var twoMinutes = 60 * 2,
+  display = document.querySelector('#gametimer');
+startGameTimer(twoMinutes, display);
+
+}
+

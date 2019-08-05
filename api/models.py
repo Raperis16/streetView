@@ -26,3 +26,11 @@ class Game(models.Model):
     Fake3 = models.ForeignKey(Random, related_name='Fake3', on_delete=models.CASCADE, null=True, blank=True)
     def __str__(self):
         return str(self.id)
+
+import time
+class TimeGameMode(models.Model):
+    now = time.time()
+    future = now + 70
+    if time.time() > future:
+        print()
+            

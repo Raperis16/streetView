@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
     path('', include('templates.urls')),
+    path('timet/', include('templates.urls')),
     
 ]
 

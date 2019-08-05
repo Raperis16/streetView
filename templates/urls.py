@@ -5,6 +5,6 @@ from . import views
 app_name = 'templates'
 urlpatterns = [
     path('', views.index, name = 'index'),
-    path('start', views.start, name = 'start')
+    path('timet/', views.timet, name = 'timet')
 ]
 
