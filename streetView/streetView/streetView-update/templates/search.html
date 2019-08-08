@@ -1,0 +1,138 @@
+ {% load staticfiles %}
+ 
+ <!DOCTYPE html>
+<html>
+  <head>
+
+    <style>
+ body {
+  font-family: Arial;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+.example button:hover {
+  background: #0b7dda;
+}
+
+.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Riga street guesser</title>
+    
+    <link rel="stylesheet" href="{% static 'css.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script>
+    function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+
+function callwm(aurl){
+  var request = new XMLHttpRequest()
+
+  request.open('GET', aurl , true)
+  
+  request.onload = function(){
+  
+    // header("Access-Control-Allow-Credentials: true");
+    // header("Access-Control-Allow-Origin: http://dev.tip.corp.tele2.com:3402/rest/T2_Sandbox/_2019/Edijs_Petrovskis/webProject?key=bat");
+    // header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    // header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  
+  
+    var data = JSON.parse(this.response)
+    desc.innerHTML = data.desc;
+  } 
+  request.send()
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+function makereq(){
+  var basicurl="http://dev.tip.corp.tele2.com:3402/rest/T2_Sandbox/_2019/Edijs_Petrovskis/webProject?key=";
+  var updatedurl = basicurl + document.getElementById("searchin").value;
+  callwm(updatedurl);
+  console.log(updatedurl);
+}
+
+
+
+document.onkeydown = function (enter) {
+    var keyCode = enter.keyCode;
+    if(keyCode == 13) {
+      document.getElementById("myBtn").click();
+    }
+};
+
+
+    </script>
+  </head>
+
+ 
+
+  <body style="overflow: hidden">
+
+      <div id="mySidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <a href="/">Start</a>
+          <a href="/timet">Time Trial</a>
+          <a href="/freegame">Free game</a>
+          <a href="/meme">Meme</a>
+        </div>
+        <div class="topnav">  
+            <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;</span>
+            <a class="active" href="/" style="
+              display: block;
+                text-align: center;
+              " >RIGA STREET GUESSER</a>
+              
+              
+            </div> 
+            <div class="example" style="margin:auto;max-width:300px;     top: 30px;
+            position: relative;">
+              <input id="searchin" type="text" placeholder="Search...">
+              <button id="myBtn" type="button" onclick="makereq()"><i class="fa fa-search"></i></button>
+          </div>
+            <div>
+
+                <p id="desc" style="color: black; padding: 80px"></p>
+                <!-- <h1 style="width: 100%; position: rssssss -->
+            </div>   
+            
+       
+</html>
